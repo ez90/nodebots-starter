@@ -1,0 +1,19 @@
+{
+  "parser": "babel-eslint",
+  "extends": [
+    "airbnb-base"
+  ],
+  "env": {
+    "browser": true,
+    "node": true
+  },
+  "rules": {
+    "func-names": "off",
+    "space-before-function-paren": "off",
+    "padded-blocks": "off",
+    "eslint semi": [
+      "error",
+      "never"
+    ]
+  }
+}
