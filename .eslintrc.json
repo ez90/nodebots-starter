@@ -10,10 +10,6 @@
   "rules": {
     "func-names": "off",
     "space-before-function-paren": "off",
-    "padded-blocks": "off",
-    "eslint semi": [
-      "error",
-      "never"
-    ]
+    "padded-blocks": "off"
   }
 }
