@@ -1,3 +1,8 @@
+require('babel-register')({
+  ignore: /\/(build|node_modules)\//,
+  presets: ['env', 'react-app'],
+});
+
 import { Board, Led } from 'johnny-five';
 import express from 'express';
 import http from 'http';
@@ -8,11 +13,9 @@ const server = http.Server(app);
 const io = new SocketIO(server);
 const port = 8090;
 
-// app.use(express.static('dist'));
-
-// app.get('/', (req, res) => {
-//   res.sendFile(path.resolve('dist/index.html'));
-// });
+app.get('/', function (req, res) {
+  res.send('Hello Fucking World!');
+});
 
 server.listen(port, () => {
   console.log('[express] Listening on *:' + port);
