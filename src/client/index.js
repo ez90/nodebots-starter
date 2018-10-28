@@ -2,7 +2,7 @@ import 'babel-polyfill';
 import socketIOClient from 'socket.io-client';
 
 // Set socketIO to the server
-const io = socketIOClient('http://localhost:8090/');
+const io = socketIOClient('http://gonzbots.com/');
 
 // Get the button for the LED toggle in the DOM
 const ledToggle = document.getElementById('led-toggle');
@@ -21,3 +21,5 @@ if (ledToggle) {
     io.emit('toggle-led');
   });
 }
+
+
