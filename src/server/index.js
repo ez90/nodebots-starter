@@ -1,8 +1,3 @@
-require('babel-register')({
-  ignore: /\/(build|node_modules)\//,
-  presets: ['env', 'react-app'],
-});
-
 import { Board, Led } from 'johnny-five';
 import express from 'express';
 import http from 'http';
