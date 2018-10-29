@@ -8,5 +8,5 @@ module.exports = merge(common, {
     contentBase: './dist',
     port: 3000,
     compress: true,
-  }
+  },
 });

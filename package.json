@@ -5,7 +5,7 @@
   "author": "Julien Gonzalez",
   "license": "MIT",
   "scripts": {
-    "build": "babel src/server/index.js -d dist && ./node_modules/.bin/webpack --config webpack.prod.js",
+    "build": "babel src/server/ -d dist/server && ./node_modules/.bin/webpack --config webpack.prod.js",
     "start:client": "./node_modules/.bin/webpack-dev-server --open --config webpack.dev.js",
     "start:server": "nodemon --exec babel-node src/server/index.js"
   },
@@ -16,6 +16,7 @@
     "socket.io-client": "^2.1.1"
   },
   "devDependencies": {
+    "babel-polyfill": "^6.26.0",
     "babel-cli": "^6.26.0",
     "babel-eslint": "^10.0.1",
     "babel-loader": "^7.1.5",
