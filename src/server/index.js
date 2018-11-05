@@ -1,4 +1,4 @@
-import { Board, Led } from 'johnny-five';
+import { Board, Led, Thermometer } from 'johnny-five';
 import express from 'express';
 import http from 'http';
 import SocketIO from 'socket.io';
@@ -8,8 +8,9 @@ const server = http.Server(app);
 const io = new SocketIO(server);
 const port = 8090;
 
-app.get('/', function (req, res) {
-  res.send('Hello Fucking World!');
+// Unnecessary :)
+app.get('/', (req, res) => {
+  res.send('Hello World!');
 });
 
 server.listen(port, () => {
@@ -34,25 +35,32 @@ const toggleLed = (led, status) => {
 
 const board = Board();
 board.on('ready', function () {
-
   // Led instance connected on Arduino port 13
   const led = new Led(13);
 
-  // This will grant access to the led instance
+  // Sensor (tmp36) connected to analog port A0
+  const tmp36 = new Thermometer({
+    controller: 'TMP36',
+    pin: 'A0',
+  });
+
+  // This will grant access to the components instances
   // from within the REPL that's created when
   // running this program.
   this.repl.inject({
     led: led,
+    tmp36: tmp36,
   });
 
   toggleLed(led, ledActive);
 
+  // [socket.io] Client has connected to server
   io.on('connect', (socket) => {
-    console.log('[socket.io] Client has connected to server');
+    tmp36.on('change', function () {
+      socket.emit('temperature-reading', this.celsius);
+    });
 
     socket.on('toggle-led', () => {
-      console.log('[socket.io] toggle-led emitted');
-
       ledActive = !ledActive;
       toggleLed(led, ledActive);
     });
